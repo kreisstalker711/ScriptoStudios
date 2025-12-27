@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | ScriptoStudios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #06b6d4;
+            --secondary: #0ea5e9;
+            --accent: #22d3ee;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #e2e8f0;
+            --text: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            top: 5%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: 50%;
+            right: 5%;
+            animation-delay: 7s;
+        }
+
+        .shape3 {
+            width: 450px;
+            height: 450px;
+            background: var(--secondary);
+            bottom: 5%;
+            left: 40%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(60px, -60px) scale(1.15);
+            }
+            66% {
+                transform: translate(-40px, 40px) scale(0.85);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 4px 30px rgba(6, 182, 212, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .page-header {
+            padding: 10rem 5% 5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease;
+        }
+
+        .page-header p {
+            font-size: 1.4rem;
+            color: var(--light);
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .services-section {
+            padding: 3rem 5% 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .service-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.8s ease forwards;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 25px 60px rgba(6, 182, 212, 0.25);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(34, 211, 238, 0.2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .service-card:hover .card-icon {
+            transform: rotateY(360deg) scale(1.1);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover h3 {
+            color: var(--accent);
+        }
+
+        .service-card p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-features li:hover {
+            padding-left: 0.5rem;
+            color: var(--accent);
+        }
+
+        .service-features li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-features li:hover::before {
+            transform: translateX(5px);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--darker);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(6, 182, 212, 0);
+            }
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(34, 211, 238, 0.05));
+            border-radius: 30px;
+            margin: 0 5%;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text);
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.4);
+        }
+
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
+            background: var(--darker);
+            margin-top: 5rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape1"></div>
+            <div class="shape shape2"></div>
+            <div class="shape shape3"></div>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">ScriptoStudios</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="about.html">Know Us</a></li>
+                <li><a href="contactus.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Our Services</h1>
+        <p>Professional creative solutions tailored to your needs. From scriptwriting to community management, we've got you covered.</p>
+    </div>
+
+    <section class="services-section" id="services">
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-icon">✍️</div>
+                <h3>Script Writing</h3>
+                <p>Professional screenplay writing for short films, with compelling narratives and authentic dialogue.</p>
+                <ul class="service-features">
+                    <li>Concept Development</li>
+                    <li>Story Structure & Pacing</li>
+                    <li>Character Development</li>
+                    <li>Industry Format</li>
+                </ul>
+                <span class="pricing-badge">100% FREE</span>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">📝</div>
+                <h3>Script Consultation</h3>
+                <p>Expert feedback and guidance to refine your existing scripts and elevate your storytelling.</p>
+                <ul class="service-features">
+                    <li>Script Analysis</li>
+                    <li>Plot Enhancement</li>
+                    <li>Dialogue Polishing</li>
+                    <li>Detailed Feedback</li>
+                </ul>
+                <span class="pricing-badge">100% FREE</span>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">🎭</div>
+                <h3>Character Development</h3>
+                <p>Deep character creation services that bring your characters to life with depth and authenticity.</p>
+                <ul class="service-features">
+                    <li>Character Backstories</li>
+                    <li>Personality Profiles</li>
+                    <li>Character Arcs</li>
+                    <li>Relationship Mapping</li>
+                </ul>
+                <span class="pricing-badge">100% FREE</span>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">🎮</div>
+                <h3>Discord Server Setup</h3>
+                <p>Complete Discord server configuration with custom channels, roles, and bot integration.</p>
+                <ul class="service-features">
+                    <li>Server Architecture</li>
+                    <li>Channel Organization</li>
+                    <li>Role Configuration</li>
+                    <li>Bot Integration</li>
+                </ul>
+                <span class="pricing-badge">100% FREE</span>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">🛡️</div>
+                <h3>Community Moderation</h3>
+                <p>Professional moderation services to keep your Discord community safe, friendly, and engaging.</p>
+                <ul class="service-features">
+                    <li>Moderation Systems</li>
+                    <li>Auto-Mod Setup</li>
+                    <li>Rule Enforcement</li>
+                    <li>Conflict Resolution</li>
+                </ul>
+                <span class="pricing-badge">100% FREE</span>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">📊</div>
+                <h3>Server Growth Strategy</h3>
+                <p>Data-driven strategies to grow your Discord community and increase member engagement.</p>
+                <ul class="service-features">
+                    <li>Growth Analytics</li>
+                    <li>Engagement Events</li>
+                    <li>Marketing Strategy</li>
+                    <li>Community Building</li>
+                </ul>
+                <span class="pricing-badge">100% FREE</span>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Get in touch with us today and let's bring your creative vision to life!</p>
+            <a href="#" class="btn">Get Started Now</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ScriptoStudios. All rights reserved. Making creativity accessible to everyone.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        const cards = document.querySelectorAll('.service-card');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

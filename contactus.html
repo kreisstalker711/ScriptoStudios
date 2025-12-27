@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | ScriptoStudios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #06b6d4;
+            --secondary: #0ea5e9;
+            --accent: #22d3ee;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #e2e8f0;
+            --text: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            top: 5%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: 50%;
+            right: 5%;
+            animation-delay: 7s;
+        }
+
+        .shape3 {
+            width: 450px;
+            height: 450px;
+            background: var(--secondary);
+            bottom: 5%;
+            left: 40%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(60px, -60px) scale(1.15);
+            }
+            66% {
+                transform: translate(-40px, 40px) scale(0.85);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 4px 30px rgba(6, 182, 212, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .page-header {
+            padding: 10rem 5% 5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease;
+        }
+
+        .page-header p {
+            font-size: 1.4rem;
+            color: var(--light);
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-section {
+            padding: 3rem 5% 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            animation: slideInLeft 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .info-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .info-card h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-card h2::before {
+            content: '📧';
+            font-size: 2rem;
+        }
+
+        .email-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(6, 182, 212, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .email-link:hover {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .email-link::before {
+            content: '✉️';
+            font-size: 1.5rem;
+        }
+
+        .info-text {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(6, 182, 212, 0.05);
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .contact-form-container {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            animation: slideInRight 1s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .contact-form-container h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            border-radius: 12px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--dark);
+            color: var(--light);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .required {
+            color: var(--accent);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            padding: 1.5rem;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            color: var(--accent);
+            text-align: center;
+            margin-top: 1.5rem;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(6, 182, 212, 0.1);
+            background: var(--darker);
+            margin-top: 5rem;
+        }
+
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape1"></div>
+            <div class="shape shape2"></div>
+            <div class="shape shape3"></div>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">ScriptoStudios</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">Know Us</a></li>
+                <li><a href="contactus.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Get In Touch</h1>
+        <p>Have a project in mind? Want to join our community? We'd love to hear from you!</p>
+    </div>
+
+    <section class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="info-card">
+                    <h2>Contact Information</h2>
+                    <a href="mailto:wherewework2025@gmail.com" class="email-link">
+                        wherewework2025@gmail.com
+                    </a>
+                    
+                    <div class="info-text">
+                        <p><strong>📍 Response Time:</strong> We typically respond within 24-48 hours</p>
+                        <p><strong>💼 Business Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM</p>
+                        <p><strong>🌍 Location:</strong> Operating Globally</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h2 style="font-size: 1.8rem;">Why Contact Us?</h2>
+                    <div class="info-text" style="border-left-color: var(--accent);">
+                        <p>✦ Free scriptwriting consultation</p>
+                        <p>✦ Discord server setup & management</p>
+                        <p>✦ Project collaboration opportunities</p>
+                        <p>✦ General inquiries & support</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <h2>Send Us a Message</h2>
+                <div id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender <span class="required">*</span></label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select your gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="non-binary">Non-Binary</option>
+                            <option value="prefer-not-to-say">Prefer not to say</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discord">Discord ID <span class="required">*</span></label>
+                        <input type="text" id="discord" name="discord" required placeholder="username#1234 or @username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address/Location <span class="required">*</span></label>
+                        <input type="text" id="address" name="address" required placeholder="City, Country">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Service Interested In</label>
+                        <select id="service" name="service">
+                            <option value="">Select a service</option>
+                            <option value="scriptwriting">Script Writing</option>
+                            <option value="script-consultation">Script Consultation</option>
+                            <option value="character-dev">Character Development</option>
+                            <option value="discord-setup">Discord Server Setup</option>
+                            <option value="community-mod">Community Moderation</option>
+                            <option value="server-growth">Server Growth Strategy</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your project or inquiry..."></textarea>
+                    </div>
+
+                    <button type="button" class="submit-btn" onclick="handleSubmit()">Send Message</button>
+
+                    <div id="successMessage" class="success-message">
+                        ✓ Thank you! Your message has been received. We'll get back to you soon!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ScriptoStudios - A WhereWeWork Inc. Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        function handleSubmit() {
+            const name = document.getElementById('name').value;
+            const gender = document.getElementById('gender').value;
+            const email = document.getElementById('email').value;
+            const discord = document.getElementById('discord').value;
+            const address = document.getElementById('address').value;
+
+            if (!name || !gender || !email || !discord || !address) {
+                alert('Please fill in all required fields marked with *');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+
+            const formData = {
+                name,
+                gender,
+                email,
+                discord,
+                address,
+                service: service || 'Not specified',
+                message: message || 'No message provided'
+            };
+
+            console.log('Form submitted:', formData);
+
+            document.getElementById('successMessage').classList.add('show');
+
+            document.getElementById('name').value = '';
+            document.getElementById('gender').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('discord').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('service').value = '';
+            document.getElementById('message').value = '';
+
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+        }
+
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && element.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    handleSubmit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
